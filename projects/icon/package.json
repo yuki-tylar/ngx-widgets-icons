@@ -1,6 +1,9 @@
 {
-  "name": "icon",
+  "name": "@takayuki-h/ngx-icons",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^11.0.9",
     "@angular/core": "^11.0.9"
