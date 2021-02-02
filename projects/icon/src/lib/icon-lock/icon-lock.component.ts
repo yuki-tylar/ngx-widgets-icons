@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ElementRef } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes} from '@angular/animations'
 
 
@@ -29,11 +29,14 @@ const unlockAnimation = trigger('unlock', [
 })
 export class IconLockComponent implements OnInit {
 
-  @Input() state?: 'on' | 'off';
+  @Input() state?: string;
 
   public isLocked: boolean = true;
+  public fill: string = 'inherit';
 
-  constructor() { }
+  private host: HTMLElement;
+
+  constructor(_el: ElementRef) { this.host = _el.nativeElement; }
 
   ngOnChanges(e: SimpleChanges){
     if(e.state && e.state.currentValue != e.state.previousValue){
@@ -43,6 +46,6 @@ export class IconLockComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLocked = (this.state == 'on')? false : true;
+    this.fill = window.getComputedStyle(this.host).color;
   }
-  
 }
