@@ -1,1 +1,17 @@
-<ngx-icon-lock [state]="stateIconLock" (click)="stateIconLock = (stateIconLock == 'off')? 'on':'off'"></ngx-icon-lock>
+<!-- <ngx-icon-lock [state]="stateIconLock" (click)="stateIconLock = (stateIconLock == 'off')? 'on':'off'"></ngx-icon-lock> -->
+
+<h2>Controller</h2>
+<div>
+  <button (click)="color = 'blue'">color blue</button>
+  <button (click)="stateIconLock = (stateIconLock == 'off') ? 'on' : 'off'">toggle State</button>
+</div>
+
+<h3>ngx-icon (lock)</h3>
+<div [ngStyle]="{color: color}">
+  <ngx-icon style="font-size: 24px;" [icon]="'lock'" [state]="stateIconLock"></ngx-icon>
+</div>
+
+<h3>ngx-icon-lock</h3>
+<div [ngStyle]="{color: color}">
+  <ngx-icon-lock  style="font-size: 24px;" [state]="stateIconLock"></ngx-icon-lock>
+</div>

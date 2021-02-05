@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, ElementRef } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes} from '@angular/animations'
-
+import { IconItemComponent, IconData } from '../icon.service';
 
 const unlockAnimation = trigger('unlock', [
   state('lock', style({})),
@@ -27,25 +27,32 @@ const unlockAnimation = trigger('unlock', [
   styleUrls: ['./icon-lock.component.scss'],
   animations: [unlockAnimation]
 })
-export class IconLockComponent implements OnInit {
+export class IconLockComponent implements OnInit, IconItemComponent {
 
-  @Input() state?: string;
+  @Input() data: IconData = {state: 'off'}; /** used when this component is created dynamically by IconComponent*/
+  @Input() state?: 'on' | 'off'; /** used to change state manually by user */
 
-  public isLocked: boolean = true;
-  public fill: string = 'inherit';
+  public fill!: string;
 
+
+  get isLocked(){ return (this.data.state == 'off') ? true : false; }
   private host: HTMLElement;
 
-  constructor(_el: ElementRef) { this.host = _el.nativeElement; }
+  constructor(
+    _el: ElementRef,
+  ) { this.host = _el.nativeElement; }
 
   ngOnChanges(e: SimpleChanges){
-    if(e.state && e.state.currentValue != e.state.previousValue){
-      this.isLocked = (this.state == 'on')? false : true;
+    if(e.state && !e.state.firstChange && this.state !== undefined){
+      this.data.state = this.state;
     }
   }
 
   ngOnInit(): void {
-    this.isLocked = (this.state == 'on')? false : true;
+    if(this.state !== undefined){ this.data.state = this.state; }
+  }
+
+  ngAfterContentChecked(){
     this.fill = window.getComputedStyle(this.host).color;
   }
 }
