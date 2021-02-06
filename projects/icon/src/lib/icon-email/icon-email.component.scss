@@ -1,0 +1,22 @@
+:host{
+  font-size: 1em;
+  line-height: 0;
+  color: inherit;
+}
+svg{
+  width: 1em;
+  height: 1em;
+}
+
+.tab{
+  transform-origin: 0 11px;
+  &.open{ transform: rotateX(180deg); }
+}
+
+.body.open{
+  transform: translateY(2px);
+}
+
+.body, .tab{
+  transition: 300ms ease;
+}
