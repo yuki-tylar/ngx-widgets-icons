@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, ComponentRef, ComponentFactoryResolver, ViewChild, ChangeDetectorRef, SimpleChanges} from '@angular/core';
 import { IconHostDirective } from './icon-host.directive';
-import { IconService, IconName, IconItemComponent, IconData } from './icon.service';
+import { IconService, IconItemComponent, IconData } from './icon.service';
 
 @Component({
   selector: 'ngx-icon',
   template: '<ng-template iconHost></ng-template>',
   styles: [
-    ':host{ font-size: 1em; color: inherit; }',
+    ':host{ font-size: 1em; color: inherit; line-height: 0;}',
   ]
 })
 export class IconComponent implements OnInit {
 
-  @Input() icon: IconName = 'lock';
+  @Input() icon: string = 'lock';
   @Input() state: IconData['state'] = 'off';
 
   @ViewChild(IconHostDirective, {static: false}) iconHost!: IconHostDirective;

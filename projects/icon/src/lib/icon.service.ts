@@ -10,7 +10,7 @@ export class IconService {
 
   constructor() { }
 
-  getIcon(name: IconName){
+  getIcon(name: string){
     let icon: IconItem;
     switch(name){
       case 'lock': icon = new IconItem( IconLockComponent ); break;
@@ -19,8 +19,6 @@ export class IconService {
     return icon;
   }
 }
-
-export type IconName = 'lock';
 
 class IconItem {
   constructor(public component: Type<any>){}
